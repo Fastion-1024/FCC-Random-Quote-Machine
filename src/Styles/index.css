@@ -1,0 +1,119 @@
+/*
+=============== 
+Variables
+===============
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+:root {
+    /* Colours */
+    --bg-primary: #f8f9ed;
+    --bg-border-primary: #79642c;
+
+    --clr-primary: #ca644d;
+    --clr-primary-outline: #a64e3b;
+
+    --clr-primary-hover: #b04b34;
+    --clr-primary-outline-hover: #803c2e;
+
+    --clr-secondary: #395c6b;
+    --clr-secondary-outline: #909cc2;
+
+    --clr-secondary-hover: #4b798c;
+    --clr-secondary-outline-hover: #b1b9d4;
+}
+
+/*
+=============== 
+Global Styles
+===============
+*/
+
+main,
+.full-height {
+    height: 100vh;
+}
+
+.container {
+    padding: 0;
+}
+
+.btn {
+    margin: 0.2rem;
+}
+
+/*
+=============== 
+Background
+===============
+*/
+
+.background {
+    background-image: url('../Resources/Background.jpg');
+    background-size: cover;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(0.4em);
+    transform: scale(1.05);
+}
+
+/*
+=============== 
+Quote-Box
+===============
+*/
+
+#quote-box {
+    position: relative;
+    background-color: var(--bg-primary);
+    border: 0.4em solid var(--bg-border-primary);
+    border-radius: 0.5em;
+    padding: 1rem;
+    z-index: 2;
+}
+
+#new-quote {
+    position: absolute;
+    height: 6rem;
+    width: 6rem;
+    bottom: -2rem;
+    right: -2rem;
+    border-radius: 50%;
+    background-color: var(--clr-primary);
+    border: 0.15rem solid var(--clr-primary-outline);
+    box-shadow: 0 0 0.4em var(--clr-primary-outline);
+    transition: background-color 0.2s ease-in-out;
+}
+
+#new-quote:hover {
+    background-color: var(--clr-primary-hover);
+    border: 0.15rem solid var(--clr-primary-outline-hover);
+}
+
+#text,
+#author {
+    font-family: 'Courgette', cursive;
+}
+
+#text {
+    font-size: 1.6rem;
+}
+
+#author {
+    font-size: 1rem;
+}
+
+.secondary-btn {
+    background-color: var(--clr-secondary);
+    border: 0.15rem solid var(--clr-secondary-outline);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.secondary-btn:hover {
+    background-color: var(--clr-secondary-hover);
+    border: 0.15rem solid var(--clr-secondary-outline-hover);
+}

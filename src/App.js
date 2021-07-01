@@ -8,13 +8,13 @@ import { useGlobalContext } from './context';
 function App() {
     const { loading, iSidebarOpen } = useGlobalContext();
 
-    if (loading) {
-        return (
-            <main>
-                <h1>Loading...</h1>
-            </main>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <main>
+    //             <h1>Loading...</h1>
+    //         </main>
+    //     );
+    // }
     return (
         <main>
             <div className='background' />

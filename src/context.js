@@ -9,7 +9,7 @@ const AppProvider = ({ children }) => {
     const [tags, setTags] = useState([]);
     const [filters, setFilters] = useState({ author: '', tags: [] });
     const [quote, setQuote] = useState({ content: '', author: '' });
-    const [filterShow, setFilterShow] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const fetchAuthors = async () => {
         setLoading(true);
@@ -122,6 +122,7 @@ const AppProvider = ({ children }) => {
                 handleAuthorFilterChange,
                 handleTagsFilterChange,
                 fetchQuote,
+                isSidebarOpen,
             }}
         >
             {children}

@@ -6,9 +6,6 @@ const Tags = () => {
     return (
         <Form>
             <Form.Group controlId='formTags'>
-                <Form.Label className='sidebar-header'>
-                    Filter By Tags:
-                </Form.Label>
                 {tags.map((tag) => {
                     const { id, name, quoteCount } = tag;
                     return (

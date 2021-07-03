@@ -10,9 +10,6 @@ const Authors = () => {
     return (
         <Form>
             <Form.Group controlId='formAlphaSelect'>
-                <Form.Label className='sidebar-header'>
-                    Filter By Author:
-                </Form.Label>
                 <Form.Control
                     as='select'
                     className='form-select'

@@ -16,7 +16,6 @@ const Tags = () => {
                             key={id}
                             id={id}
                             type='checkbox'
-                            className='form-switch'
                             value={name}
                             label={`${name} - ${quoteCount}`}
                             onChange={(e) =>

@@ -105,6 +105,14 @@ const AppProvider = ({ children }) => {
         }
     };
 
+    const openSidebar = () => {
+        setIsSidebarOpen(true);
+    };
+
+    const closeSidebar = () => {
+        setIsSidebarOpen(false);
+    };
+
     useEffect(() => {
         fetchAuthors();
         fetchTags();
@@ -123,6 +131,8 @@ const AppProvider = ({ children }) => {
                 handleTagsFilterChange,
                 fetchQuote,
                 isSidebarOpen,
+                openSidebar,
+                closeSidebar,
             }}
         >
             {children}

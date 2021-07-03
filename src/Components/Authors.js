@@ -3,17 +3,27 @@ import { useGlobalContext } from '../context';
 import Form from 'react-bootstrap/Form';
 
 const Authors = () => {
-    const { authors, handleAuthorFilterChange } = useGlobalContext();
+    const { authors, handleAuthorFilterChange, filters, setFilters } =
+        useGlobalContext();
     const [char, setChar] = useState('A');
     const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     return (
         <Form>
+            <Form.Check
+                checked={filters.filterByAuthor}
+                onChange={(e) =>
+                    setFilters({ ...filters, filterByAuthor: e.target.value })
+                }
+                label='Filter By Author:'
+                className='form-switch'
+            />
             <Form.Group controlId='formAlphaSelect'>
                 <Form.Control
                     as='select'
                     className='form-select'
                     onChange={(e) => setChar(e.target.value)}
+                    disabled={!filters.filterByAuthor}
                 >
                     {alpha.split('').map((char, index) => {
                         return <option key={index}>{char}</option>;
@@ -25,6 +35,7 @@ const Authors = () => {
                     as='select'
                     className='form-select'
                     onChange={(e) => handleAuthorFilterChange(e.target.value)}
+                    disabled={!filters.filterByAuthor}
                 >
                     {authors
                         .filter((author) => author.name.charAt(0) === char)

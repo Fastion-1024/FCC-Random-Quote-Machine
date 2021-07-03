@@ -169,6 +169,10 @@ Side-Box
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.6);
     transition: all 0.2s ease-in;
+    pointer-events: none;
+}
+
+.show-modal-blur {
+    background: rgba(0, 0, 0, 0.6);
 }

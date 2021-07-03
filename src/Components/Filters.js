@@ -10,7 +10,11 @@ const Filters = () => {
 
     return (
         <>
-            <div className={`${isSidebarOpen && 'modal-blur'}`} />
+            <div
+                className={`${
+                    isSidebarOpen ? 'modal-blur show-modal-blur' : 'modal-blur'
+                }`}
+            />
             {/* {isSidebarOpen && <div className='modal-blur' />} */}
             <aside
                 className={`${

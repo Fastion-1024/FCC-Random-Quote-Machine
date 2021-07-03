@@ -1,15 +1,33 @@
-import { useState } from 'react';
 import { useGlobalContext } from '../context';
-import Form from 'react-bootstrap/Form';
 import Authors from './Authors';
 import Tags from './Tags';
+import { FaTimes } from 'react-icons/fa';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 const Filters = () => {
+    const { isSidebarOpen, closeSidebar } = useGlobalContext();
+
     return (
-        <aside>
-            <Authors />
-            <Tags />
-        </aside>
+        <>
+            <div className={`${isSidebarOpen && 'modal-blur'}`} />
+            {/* {isSidebarOpen && <div className='modal-blur' />} */}
+            <aside
+                className={`${
+                    isSidebarOpen ? 'sidebar show-sidebar' : 'sidebar'
+                }`}
+            >
+                <Container className='d-flex justify-content-between'>
+                    <h2 className='sidebar-header'>Filters</h2>
+                    <Button className='secondary-btn' onClick={closeSidebar}>
+                        <FaTimes />
+                    </Button>
+                </Container>
+
+                <Authors />
+                <Tags />
+            </aside>
+        </>
     );
 };
 

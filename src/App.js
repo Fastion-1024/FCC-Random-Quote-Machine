@@ -3,18 +3,8 @@ import Filters from './Components/Filters';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useGlobalContext } from './context';
 
 function App() {
-    const { loading, iSidebarOpen } = useGlobalContext();
-
-    // if (loading) {
-    //     return (
-    //         <main>
-    //             <h1>Loading...</h1>
-    //         </main>
-    //     );
-    // }
     return (
         <main>
             <div className='background' />
@@ -33,7 +23,7 @@ function App() {
                     </Col>
                 </Row>
             </Container>
-            {iSidebarOpen && <Filters />}
+            <Filters />
         </main>
     );
 }

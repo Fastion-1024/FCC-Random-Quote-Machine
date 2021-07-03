@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { FaTwitter, FaFilter } from 'react-icons/fa';
 
 const QuoteBox = () => {
-    const { quote, fetchQuote } = useGlobalContext();
+    const { quote, fetchQuote, openSidebar } = useGlobalContext();
     return (
         <section id='quote-box'>
             <figure>
@@ -17,7 +17,7 @@ const QuoteBox = () => {
             </figure>
 
             <Container className='d-flex justify-content-start'>
-                <Button className='secondary-btn'>
+                <Button className='secondary-btn' onClick={openSidebar}>
                     <FaFilter />
                 </Button>
 

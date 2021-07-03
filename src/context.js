@@ -7,7 +7,12 @@ const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [authors, setAuthors] = useState([]);
     const [tags, setTags] = useState([]);
-    const [filters, setFilters] = useState({ author: '', tags: [] });
+    const [filters, setFilters] = useState({
+        author: '',
+        tags: [],
+        filterByAuthor: false,
+        filterByTags: false,
+    });
     const [quote, setQuote] = useState({ content: '', author: '' });
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -68,11 +73,19 @@ const AppProvider = ({ children }) => {
     const fetchQuote = async () => {
         let url = 'https://api.quotable.io/random';
 
-        if (filters.author !== '' && filters.tags.length > 0) {
-            url += `?author=${filters.author}&tags=${filters.tags.join('|')}`;
-        } else if (filters.author !== '') {
+        if (filters.filterByAuthor && filters.filterByTags) {
+            if (filters.author === '') {
+                console.log('Error:- No Author Selected!');
+            } else if (filters.tags.length === 0) {
+                console.log('Error:- No Tags Selected!');
+            } else {
+                url += `?author=${filters.author}&tags=${filters.tags.join(
+                    '|'
+                )}`;
+            }
+        } else if (filters.filterByAuthor && filters.author !== '') {
             url += `?author=${filters.author}`;
-        } else if (filters.tags.length > 0) {
+        } else if (filters.filterByTags && filters.tags.length > 0) {
             url += `?tags=${filters.tags.join('|')}`;
         }
 
@@ -126,6 +139,7 @@ const AppProvider = ({ children }) => {
                 authors,
                 tags,
                 filters,
+                setFilters,
                 quote,
                 handleAuthorFilterChange,
                 handleTagsFilterChange,

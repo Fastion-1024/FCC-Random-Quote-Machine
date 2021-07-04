@@ -1,35 +1,42 @@
 import { useGlobalContext } from '../context';
 import Authors from './Authors';
 import Tags from './Tags';
-import { FaTimes } from 'react-icons/fa';
+import { FaUndoAlt, FaCheck } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
 const Filters = () => {
-    const { isSidebarOpen, closeSidebar } = useGlobalContext();
+    const { sideBarHidden, closeSidebar, resetFilters, quoteCount } =
+        useGlobalContext();
 
     return (
         <>
             <div
                 className={`${
-                    isSidebarOpen ? 'modal-blur show-modal-blur' : 'modal-blur'
+                    sideBarHidden ? 'modal-blur' : 'modal-blur show-modal-blur'
                 }`}
             />
-            {/* {isSidebarOpen && <div className='modal-blur' />} */}
             <aside
                 className={`${
-                    isSidebarOpen ? 'sidebar show-sidebar' : 'sidebar'
+                    sideBarHidden ? 'sidebar' : 'sidebar show-sidebar'
                 }`}
             >
-                <Container className='d-flex justify-content-between'>
-                    <h2 className='sidebar-header'>Filters</h2>
-                    <Button className='secondary-btn' onClick={closeSidebar}>
-                        <FaTimes />
-                    </Button>
-                </Container>
+                <h2 className='sidebar-header'>Filters</h2>
 
                 <Authors />
+                <h3>Or</h3>
                 <Tags />
+
+                <h3 className='text-center'>Matching Quotes: {quoteCount} </h3>
+
+                <Container className='d-flex justify-content-around filter-controls-container'>
+                    <Button className='secondary-btn' onClick={resetFilters}>
+                        <FaUndoAlt />
+                    </Button>
+                    <Button className='secondary-btn' onClick={closeSidebar}>
+                        <FaCheck />
+                    </Button>
+                </Container>
             </aside>
         </>
     );

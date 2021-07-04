@@ -27,7 +27,7 @@ const QuoteBox = () => {
                     href={
                         'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
                         encodeURIComponent(
-                            '"' + quote.quote + '" ' + quote.author
+                            '"' + quote.content + '" ' + quote.author
                         )
                     }
                     target='_blank'

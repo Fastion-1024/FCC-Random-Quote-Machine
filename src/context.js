@@ -1,26 +1,32 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useReducer } from 'react';
 import { useCallback } from 'react';
+import { actions } from './reducer';
+import reducer from './reducer';
 
 const AppContext = React.createContext();
 
+const initialState = {
+    loading: false,
+    error: { hidden: true, message: '' },
+    authors: [],
+    selectedAuthor: '',
+    tags: [],
+    quote: { content: '', author: '' },
+    sideBarHidden: true,
+    filterByAuthor: false,
+    filterByTags: false,
+    quoteCount: 0,
+};
+
 const AppProvider = ({ children }) => {
-    const [loading, setLoading] = useState(true);
-    const [authors, setAuthors] = useState([]);
-    const [tags, setTags] = useState([]);
-    const [filters, setFilters] = useState({
-        author: '',
-        tags: [],
-        filterByAuthor: false,
-        filterByTags: false,
-    });
-    const [quote, setQuote] = useState({ content: '', author: '' });
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const fetchAuthors = async () => {
-        setLoading(true);
+        dispatch({ type: actions.LOADING });
 
         try {
-            // Setup variables for getting all results.
+            // Setup variables to loop through API pages.
+            // We will retrieve all authors from the API
             let fetchPage = 1;
             let authors = [];
             let lastPage = false;
@@ -42,16 +48,16 @@ const AppProvider = ({ children }) => {
                 data.page === data.totalPages ? (lastPage = true) : fetchPage++;
             }
 
-            setAuthors(authors);
-            setLoading(false);
+            dispatch({ type: actions.DISPLAY_AUTHORS, payload: authors });
+            dispatch({ type: actions.SELECT_FIRST_AUTHOR });
         } catch (error) {
             console.log(error);
-            setLoading(false);
+            setError('Error When Fetching Authors!');
         }
     };
 
     const fetchTags = async () => {
-        setLoading(true);
+        dispatch({ type: actions.LOADING });
 
         try {
             const response = await fetch('https://api.quotable.io/tags');
@@ -59,71 +65,90 @@ const AppProvider = ({ children }) => {
 
             const newTags = data.map((tag) => {
                 const { _id, name, quoteCount } = tag;
-                return { id: _id, name, quoteCount };
+                return { id: _id, name, quoteCount, checked: false };
             });
 
-            setTags(newTags);
-            setLoading(false);
+            dispatch({ type: actions.DISPLAY_TAGS, payload: newTags });
         } catch (error) {
             console.log(error);
-            setLoading(false);
+            setError('Error When Fetching Tags!');
         }
     };
 
     const fetchQuote = async () => {
         let url = 'https://api.quotable.io/random';
 
-        if (filters.filterByAuthor && filters.filterByTags) {
-            if (filters.author === '') {
-                console.log('Error:- No Author Selected!');
-            } else if (filters.tags.length === 0) {
-                console.log('Error:- No Tags Selected!');
-            } else {
-                url += `?author=${filters.author}&tags=${filters.tags.join(
-                    '|'
-                )}`;
+        if (state.filterByAuthor) {
+            if (state.selectedAuthor === '') {
+                setError('Error:- No Author Selected!');
             }
-        } else if (filters.filterByAuthor && filters.author !== '') {
-            url += `?author=${filters.author}`;
-        } else if (filters.filterByTags && filters.tags.length > 0) {
-            url += `?tags=${filters.tags.join('|')}`;
+            url += `?author=${state.selectedAuthor}`;
+        } else if (state.filterByTags) {
+            if (!state.tags.some((tag) => tag.checked)) {
+                setError('Error:- No Tags Selected!');
+            }
+            url += `?tags=${state.tags.filter((tag) => tag.checked).join('|')}`;
         }
 
-        setLoading(true);
+        dispatch({ type: actions.LOADING });
 
         try {
             const response = await fetch(url);
             const data = await response.json();
             const { content, author } = data;
 
-            setQuote({ content, author });
-            setLoading(false);
+            dispatch({
+                type: actions.DISPLAY_QUOTE,
+                payload: { content, author },
+            });
         } catch (error) {
             console.log(error);
-            setLoading(false);
+            setError('Error When Fetching Quote');
         }
     };
 
-    const handleAuthorFilterChange = (author) => {
-        setFilters({ ...filters, author });
-    };
-
-    const handleTagsFilterChange = (tag) => {
-        if (filters.tags.includes(tag)) {
-            const newTags = filters.tags.filter((item) => item !== tag);
-            setFilters({ ...filters, tags: newTags });
-        } else {
-            const newTags = [...filters.tags, tag];
-            setFilters({ ...filters, tags: newTags });
-        }
+    const setError = (message) => {
+        dispatch({ type: actions.ERROR, payload: message });
     };
 
     const openSidebar = () => {
-        setIsSidebarOpen(true);
+        dispatch({ type: actions.SHOW_SIDEBAR });
+        dispatch({ type: actions.UPDATE_QUOTE_COUNT });
     };
 
     const closeSidebar = () => {
-        setIsSidebarOpen(false);
+        dispatch({ type: actions.HIDE_SIDEBAR });
+    };
+
+    const handleSelectedAuthorChange = (name) => {
+        dispatch({ type: actions.UPDATE_SELECTED_AUTHOR, payload: name });
+        dispatch({ type: actions.UPDATE_QUOTE_COUNT });
+    };
+
+    const handleSelectedTagsChange = (id) => {
+        dispatch({ type: actions.TOGGLE_TAG, payload: id });
+        dispatch({ type: actions.UPDATE_QUOTE_COUNT });
+    };
+
+    const toggleFilterByAuthor = () => {
+        dispatch({ type: actions.TOGGLE_FILTER_BY_AUTHOR });
+        if (state.filterByTags) {
+            dispatch({ type: actions.TOGGLE_FILTER_BY_TAGS });
+        }
+        dispatch({ type: actions.UPDATE_QUOTE_COUNT });
+    };
+
+    const toggleFilterByTags = () => {
+        dispatch({ type: actions.TOGGLE_FILTER_BY_TAGS });
+        if (state.filterByAuthor) {
+            dispatch({ type: actions.TOGGLE_FILTER_BY_AUTHOR });
+        }
+        dispatch({ type: actions.UPDATE_QUOTE_COUNT });
+    };
+
+    const resetFilters = () => {
+        dispatch({ type: actions.RESET_FILTERS });
+        dispatch({ type: actions.UPDATE_QUOTE_COUNT });
     };
 
     useEffect(() => {
@@ -135,18 +160,15 @@ const AppProvider = ({ children }) => {
     return (
         <AppContext.Provider
             value={{
-                loading,
-                authors,
-                tags,
-                filters,
-                setFilters,
-                quote,
-                handleAuthorFilterChange,
-                handleTagsFilterChange,
-                fetchQuote,
-                isSidebarOpen,
+                ...state,
                 openSidebar,
                 closeSidebar,
+                handleSelectedAuthorChange,
+                handleSelectedTagsChange,
+                toggleFilterByAuthor,
+                toggleFilterByTags,
+                fetchQuote,
+                resetFilters,
             }}
         >
             {children}

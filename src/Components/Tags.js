@@ -2,32 +2,31 @@ import { useGlobalContext } from '../context';
 import Form from 'react-bootstrap/Form';
 
 const Tags = () => {
-    const { tags, handleTagsFilterChange, filters, setFilters } =
+    const { tags, handleSelectedTagsChange, filterByTags, toggleFilterByTags } =
         useGlobalContext();
+
     return (
         <Form>
             <Form.Check
-                checked={filters.filterByTags}
-                onChange={(e) =>
-                    setFilters({ ...filters, filterByTags: e.target.value })
-                }
+                checked={filterByTags}
+                onChange={toggleFilterByTags}
                 label='Filter By Tags:'
                 className='form-switch'
             />
             <Form.Group controlId='formTags'>
                 {tags.map((tag) => {
-                    const { id, name, quoteCount } = tag;
+                    const { id, name } = tag;
                     return (
                         <Form.Check
                             key={id}
                             id={id}
                             type='checkbox'
-                            value={name}
-                            label={`${name} - ${quoteCount}`}
+                            label={name}
+                            checked={tag.checked}
                             onChange={(e) =>
-                                handleTagsFilterChange(e.target.value)
+                                handleSelectedTagsChange(e.target.id)
                             }
-                            disabled={!filters.filterByTags}
+                            disabled={!filterByTags}
                         />
                     );
                 })}

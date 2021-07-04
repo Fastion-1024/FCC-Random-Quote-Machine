@@ -158,6 +158,12 @@ Side-Box
 
 .sidebar-header {
     font-weight: 600;
+    margin-top: 1rem;
+}
+
+.sidebar h3 {
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
 }
 
 .modal-blur {
@@ -175,4 +181,18 @@ Side-Box
 
 .show-modal-blur {
     background: rgba(0, 0, 0, 0.6);
+}
+
+.filter-controls-container {
+    margin: 0, 1rem;
+}
+
+.form-switch {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+select {
+    margin: 0.6rem 0;
 }

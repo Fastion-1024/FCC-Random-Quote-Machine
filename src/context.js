@@ -87,7 +87,10 @@ const AppProvider = ({ children }) => {
             if (!state.tags.some((tag) => tag.checked)) {
                 setError('Error:- No Tags Selected!');
             }
-            url += `?tags=${state.tags.filter((tag) => tag.checked).join('|')}`;
+            url += `?tags=${state.tags
+                .filter((tag) => tag.checked)
+                .map((tag) => tag.name)
+                .join('|')}`;
         }
 
         dispatch({ type: actions.LOADING });

@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/FCC-Random-Quote-Machine/static/css/main.1c7bbbd5.chunk.css",
-    "main.js": "/FCC-Random-Quote-Machine/static/js/main.d8759cb5.chunk.js",
-    "main.js.map": "/FCC-Random-Quote-Machine/static/js/main.d8759cb5.chunk.js.map",
+    "main.css": "/FCC-Random-Quote-Machine/static/css/main.e1994de1.chunk.css",
+    "main.js": "/FCC-Random-Quote-Machine/static/js/main.5cab2f57.chunk.js",
+    "main.js.map": "/FCC-Random-Quote-Machine/static/js/main.5cab2f57.chunk.js.map",
     "runtime-main.js": "/FCC-Random-Quote-Machine/static/js/runtime-main.4c178e24.js",
     "runtime-main.js.map": "/FCC-Random-Quote-Machine/static/js/runtime-main.4c178e24.js.map",
     "static/js/2.45b2df08.chunk.js": "/FCC-Random-Quote-Machine/static/js/2.45b2df08.chunk.js",
     "static/js/2.45b2df08.chunk.js.map": "/FCC-Random-Quote-Machine/static/js/2.45b2df08.chunk.js.map",
     "index.html": "/FCC-Random-Quote-Machine/index.html",
-    "static/css/main.1c7bbbd5.chunk.css.map": "/FCC-Random-Quote-Machine/static/css/main.1c7bbbd5.chunk.css.map",
+    "static/css/main.e1994de1.chunk.css.map": "/FCC-Random-Quote-Machine/static/css/main.e1994de1.chunk.css.map",
     "static/js/2.45b2df08.chunk.js.LICENSE.txt": "/FCC-Random-Quote-Machine/static/js/2.45b2df08.chunk.js.LICENSE.txt",
     "static/media/index.css": "/FCC-Random-Quote-Machine/static/media/Background.10e7aaec.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.4c178e24.js",
     "static/js/2.45b2df08.chunk.js",
-    "static/css/main.1c7bbbd5.chunk.css",
-    "static/js/main.d8759cb5.chunk.js"
+    "static/css/main.e1994de1.chunk.css",
+    "static/js/main.5cab2f57.chunk.js"
   ]
 }

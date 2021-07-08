@@ -30,18 +30,21 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 authors: action.payload,
+                loading: false,
             };
 
         case actions.DISPLAY_TAGS:
             return {
                 ...state,
                 tags: action.payload,
+                loading: false,
             };
 
         case actions.DISPLAY_QUOTE:
             return {
                 ...state,
                 quote: action.payload,
+                loading: false,
             };
 
         case actions.SHOW_SIDEBAR:

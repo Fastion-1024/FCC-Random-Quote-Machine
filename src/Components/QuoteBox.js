@@ -2,17 +2,23 @@ import { useGlobalContext } from '../context';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { FaTwitter, FaFilter } from 'react-icons/fa';
+import Loading from './Loading';
 
 const QuoteBox = () => {
-    const { quote, fetchQuote, openSidebar } = useGlobalContext();
+    const { quote, fetchQuote, openSidebar, loading } = useGlobalContext();
     return (
         <section id='quote-box'>
             <figure>
                 <blockquote className='blockquote text-center'>
-                    <span id='text'>{quote.content}</span>
+                    <span id='text'>
+                        {loading ? <Loading /> : quote.content}
+                    </span>
                 </blockquote>
-                <figcaption id='author' className='blockquote-footer text-end'>
-                    {quote.author}
+                <figcaption
+                    id='author'
+                    className={loading ? '' : 'blockquote-footer text-end'}
+                >
+                    {loading ? '' : quote.author}
                 </figcaption>
             </figure>
 

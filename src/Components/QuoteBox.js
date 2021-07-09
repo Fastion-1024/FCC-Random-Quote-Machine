@@ -24,7 +24,8 @@ const QuoteBox = () => {
 
             <Container className='d-flex justify-content-start'>
                 <Button className='secondary-btn' onClick={openSidebar}>
-                    <FaFilter />
+                    <FaFilter aria-hidden='true' focusable='false' />
+                    <span className='visually-hidden'>Filters</span>
                 </Button>
 
                 <Button
@@ -38,7 +39,8 @@ const QuoteBox = () => {
                     }
                     target='_blank'
                 >
-                    <FaTwitter />
+                    <FaTwitter aria-hidden='true' focusable='false' />
+                    <span className='visually-hidden'>Tweet</span>
                 </Button>
             </Container>
 

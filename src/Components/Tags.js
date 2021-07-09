@@ -7,12 +7,15 @@ const Tags = () => {
 
     return (
         <Form>
-            <Form.Check
-                checked={filterByTags}
-                onChange={toggleFilterByTags}
-                label='Filter By Tags:'
-                className='form-switch'
-            />
+            <Form.Group controlId='formFilterTags'>
+                <Form.Check
+                    checked={filterByTags}
+                    onChange={toggleFilterByTags}
+                    label='Filter By Tags:'
+                    className='form-switch'
+                />
+            </Form.Group>
+
             <Form.Group controlId='formTags'>
                 {tags.map((tag) => {
                     const { id, name } = tag;

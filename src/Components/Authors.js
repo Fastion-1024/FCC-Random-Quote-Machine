@@ -15,13 +15,17 @@ const Authors = () => {
 
     return (
         <Form>
-            <Form.Check
-                checked={filterByAuthor}
-                onChange={toggleFilterByAuthor}
-                label='Filter By Author:'
-                className='form-switch'
-            />
+            <Form.Group controlId='formFilterAuthors'>
+                <Form.Check
+                    checked={filterByAuthor}
+                    onChange={toggleFilterByAuthor}
+                    label='Filter By Author:'
+                    className='form-switch'
+                />
+            </Form.Group>
+
             <Form.Group controlId='formAlphaSelect'>
+                <Form.Label>Author Initial</Form.Label>
                 <Form.Control
                     as='select'
                     className='form-select'
@@ -34,6 +38,7 @@ const Authors = () => {
                 </Form.Control>
             </Form.Group>
             <Form.Group controlId='formAuthors'>
+                <Form.Label>Author Name</Form.Label>
                 <Form.Control
                     as='select'
                     className='form-select'

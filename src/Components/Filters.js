@@ -31,10 +31,12 @@ const Filters = () => {
 
                 <Container className='d-flex justify-content-around filter-controls-container'>
                     <Button className='secondary-btn' onClick={resetFilters}>
-                        <FaUndoAlt />
+                        <FaUndoAlt aria-hidden='true' focusable='false' />
+                        <span className='visually-hidden'>Reset Filters</span>
                     </Button>
                     <Button className='secondary-btn' onClick={closeSidebar}>
-                        <FaCheck />
+                        <FaCheck aria-hidden='true' focusable='false' />
+                        <span className='visually-hidden'>Close Filters</span>
                     </Button>
                 </Container>
             </aside>
